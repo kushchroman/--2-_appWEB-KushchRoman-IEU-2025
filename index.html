@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarketHub — головна сторінка (макет)</title>
+
+  <style>
+    :root{
+      --accent:#00a046;
+      --bg:#f6f7f9;
+      --text:#121212;
+      --muted:#667085;
+      --card:#ffffff;
+      --border:#e6e8ee;
+      --shadow: 0 10px 30px rgba(16,24,40,.08);
+      --r:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:1200px; margin:0 auto; padding:0 16px; }
+
+    /* HEADER */
+    header{
+      background:var(--card);
+      border-bottom:1px solid var(--border);
+      position:sticky; top:0; z-index:10;
+    }
+    .top{
+      display:flex; align-items:center; gap:12px;
+      padding:14px 0;
+    }
+    .burger{
+      width:42px; height:42px; border-radius:12px;
+      border:1px solid var(--border); background:#fff; cursor:pointer;
+      display:grid; place-items:center;
+    }
+    .logo{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900; letter-spacing:.3px;
+      white-space:nowrap;
+    }
+    .logoBadge{
+      width:34px; height:34px; border-radius:10px;
+      background:linear-gradient(135deg, var(--accent), #27d17c);
+      display:grid; place-items:center;
+      color:#fff; font-weight:900;
+    }
+    .catalogBtn{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:800;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .search{
+      flex:1;
+      display:flex; gap:8px; align-items:center;
+    }
+    .search input{
+      width:100%;
+      padding:12px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      outline:none;
+      background:#fafbff;
+    }
+    .search button{
+      padding:12px 14px;
+      border:0; border-radius:12px;
+      background:var(--accent);
+      color:#fff; font-weight:900;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .actions{ display:flex; gap:10px; align-items:center; }
+    .iconBtn{
+      width:42px; height:42px; border-radius:12px;
+      border:1px solid var(--border); background:#fff;
+      display:grid; place-items:center;
+    }
+
+    .subnav{
+      border-top:1px solid var(--border);
+      padding:10px 0;
+    }
+    .chips{ display:flex; gap:10px; flex-wrap:wrap; }
+    .chip{
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:#fff;
+      font-size:14px;
+      color:#1f2937;
+    }
+    .chip:hover{ border-color:#cfd5e3; }
+
+    /* LAYOUT */
+    main{ padding:18px 0 40px; }
+    .layout{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--r);
+      box-shadow: var(--shadow);
+    }
+    .cardPad{ padding:16px; }
+
+    /* SIDEBAR */
+    .sidebar h2{ margin:0 0 10px; font-size:18px; }
+    .catList{ list-style:none; padding:0; margin:0; }
+    .catList li a{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 10px;
+      border-radius:12px;
+      color:#111827;
+    }
+    .catList li a:hover{ background:#f4f7ff; }
+    .tag{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--border);
+      padding:3px 8px;
+      border-radius:999px;
+      background:#fff;
+    }
+    .miniBox{
+      margin-top:12px;
+      border-top:1px solid var(--border);
+      padding-top:12px;
+    }
+    .miniBox h3{ margin:0 0 8px; font-size:14px; color:#111827; }
+    .miniBox ul{ margin:0; padding-left:18px; color:var(--muted); }
+    .miniBox ol{ margin:10px 0 0; padding-left:18px; color:var(--muted); }
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.4fr .6fr;
+      gap:16px;
+    }
+    .banner{
+      overflow:hidden;
+      border-radius:var(--r);
+      border:1px solid var(--border);
+      background:linear-gradient(135deg, #eafff3, #f5fbff);
+    }
+    .bannerGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      align-items:center;
+      gap:10px;
+      padding:18px;
+    }
+    .banner h1{ margin:0 0 6px; font-size:24px; }
+    .banner h2{ margin:0 0 10px; font-size:16px; color:var(--muted); font-weight:700; }
+    .banner p{ margin:0; color:var(--muted); line-height:1.45; }
+    .banner img{
+      width:100%;
+      max-height:210px;
+      object-fit:cover;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,.06);
+      background:#fff;
+    }
+    .cta{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;
+    }
+    .btn{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:900;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+    }
+    .btnPrimary{
+      background:var(--accent);
+      border-color:transparent;
+      color:#fff;
+    }
+
+    .promo{
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .promo img{
+      width:100%;
+      height:140px;
+      object-fit:cover;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .promo .text{ color:var(--muted); font-size:14px; line-height:1.45; }
+    .promo h3{ margin:0; font-size:16px; }
+
+    /* PRODUCTS */
+    .sectionTitle{
+      display:flex; align-items:baseline; justify-content:space-between;
+      margin:16px 0 10px;
+      gap:10px;
+    }
+    .sectionTitle h2{ margin:0; font-size:20px; }
+    .sectionTitle small{ color:var(--muted); }
+
+    .products{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+    }
+    .product{
+      padding:12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#fff;
+      box-shadow: 0 6px 18px rgba(16,24,40,.05);
+    }
+    .product img{
+      width:100%;
+      height:150px;
+      object-fit:cover;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.06);
+      background:#fafafa;
+    }
+    .product h3{
+      margin:10px 0 6px;
+      font-size:15px;
+      line-height:1.25;
+    }
+    .price{
+      font-weight:900;
+      font-size:18px;
+      margin:4px 0;
+    }
+    .meta{
+      color:var(--muted);
+      font-size:13px;
+    }
+    .rowBtns{
+      display:flex; gap:8px; margin-top:10px;
+    }
+    .rowBtns button{
+      flex:1;
+      padding:10px 10px;
+      border-radius:12px;
+      border:0;
+      background:var(--accent);
+      color:#fff;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .rowBtns a{
+      padding:10px 10px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-weight:800;
+      font-size:14px;
+    }
+
+    /* TABLE */
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+      overflow:hidden;
+      border-radius:14px;
+    }
+    th, td{
+      border:1px solid var(--border);
+      padding:10px;
+      text-align:left;
+    }
+    th{ background:#fafbff; }
+
+    /* FORM */
+    form label{ display:block; font-weight:900; margin:10px 0 6px; }
+    input, select, textarea{
+      width:100%;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      outline:none;
+      background:#fff;
+      font-family:inherit;
+    }
+    textarea{ min-height:110px; resize:vertical; }
+    .formGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .formActions{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .note{ color:var(--muted); font-size:13px; }
+
+    footer{
+      background:#fff;
+      border-top:1px solid var(--border);
+      padding:16px 0;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1000px){
+      .layout{ grid-template-columns:1fr; }
+      .hero{ grid-template-columns:1fr; }
+      .bannerGrid{ grid-template-columns:1fr; }
+      .products{ grid-template-columns: repeat(2, 1fr); }
+      .formGrid{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 560px){
+      .products{ grid-template-columns:1fr; }
+      .top{ flex-wrap:wrap; }
+      .actions{ width:100%; justify-content:flex-end; }
+      .search{ width:100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <div class="top">
+        <button class="burger" type="button" aria-label="Меню">☰</button>
+
+        <a class="logo" href="index.html">
+          <span class="logoBadge">M</span>
+          <span>MarketHub</span>
+        </a>
+
+        <button class="catalogBtn" type="button">Каталог</button>
+
+        <div class="search">
+          <input type="search" placeholder="Я шукаю… (наприклад, навушники)" />
+          <button type="button">Знайти</button>
+        </div>
+
+        <div class="actions">
+          <a class="iconBtn" href="#favorites" title="Обране">♡</a>
+          <a class="iconBtn" href="#cart" title="Кошик">🛒</a>
+          <a class="iconBtn" href="#account" title="Профіль">👤</a>
+        </div>
+      </div>
+
+      <div class="subnav">
+        <div class="chips">
+          <a class="chip" href="#top">Рекомендації</a>
+          <a class="chip" href="#delivery">Доставка</a>
+          <a class="chip" href="#form">Заявка</a>
+          <a class="chip" href="about.html">Опис предметної галузі та бізнес-логіки</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="layout">
+      <!-- Ліва колонка: категорії + списки -->
+      <aside class="card cardPad sidebar">
+        <h2>Категорії</h2>
+
+        <!-- Маркований список (ul) у вигляді меню -->
+        <ul class="catList">
+          <li><a href="#c1">Ноутбуки <span class="tag">топ</span></a></li>
+          <li><a href="#c2">Смартфони <span class="tag">новинки</span></a></li>
+          <li><a href="#c3">Побутова техніка <span class="tag">акції</span></a></li>
+          <li><a href="#c4">Товари для дому <span class="tag">хіт</span></a></li>
+          <li><a href="#c5">Спорт і хобі <span class="tag">sale</span></a></li>
+        </ul>
+
+        <div class="miniBox">
+          <h3>Переваги сервісу (ul)</h3>
+          <ul>
+            <li>Сучасний дизайн</li>
+            <li>Швидка навігація</li>
+            <li>Зручний пошук</li>
+          </ul>
+
+          <h3 style="margin-top:12px;">Як оформити (ol)</h3>
+          <!-- Нумерований список -->
+          <ol>
+            <li>Обрати товар</li>
+            <li>Додати у кошик</li>
+            <li>Заповнити форму</li>
+            <li>Отримати підтвердження</li>
+          </ol>
+        </div>
+      </aside>
+
+      <!-- Права колонка -->
+      <section>
+        <!-- Банер + зображення -->
+        <div class="hero">
+          <div class="card banner" id="c1">
+            <div class="bannerGrid">
+              <div>
+                <h1>Головна сторінка WEB-застосунку</h1>
+                <h2>Сучасний макет маркетплейсу</h2>
+                <p>
+                  Це навчальний шаблон: тут є всі потрібні теги для лабораторної
+                  (зображення, таблиця, списки, форма та посилання на 2-гу сторінку).
+                </p>
+                <div class="cta">
+                  <a class="btn btnPrimary" href="#top">Перейти до рекомендацій</a>
+                  <a class="btn" href="about.html">Опис предметної галузі</a>
+                </div>
+              </div>
+
+              <!-- Зображення 1 -->
+              <img
+                src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=60"
+                alt="Банер: ноутбук" />
+            </div>
+          </div>
+
+          <div class="card cardPad promo" id="c2">
+            <div>
+              <h3>Акція тижня</h3>
+              <p class="text">Демо-блок акцій, щоб сторінка виглядала “як магазин”.</p>
+            </div>
+
+            <!-- Зображення 2 -->
+            <img
+              src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=1200&q=60"
+              alt="Промо: техніка" />
+
+            <a class="btn btnPrimary" href="#delivery">Дивитись доставку</a>
+          </div>
+        </div>
+
+        <!-- Рекомендації (картки товарів + зображення) -->
+        <div class="card cardPad" style="margin-top:16px;">
+          <div class="sectionTitle" id="top">
+            <h2>Рекомендації для вас</h2>
+            <small>Демо-картки</small>
+          </div>
+
+          <div class="products">
+            <article class="product" id="c3">
+              <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=60" alt="Смартфон">
+              <h3>Смартфон Nova X12</h3>
+              <div class="price">12 999 ₴</div>
+              <div class="meta">128 GB • 5000 mAh</div>
+              <div class="rowBtns">
+                <button type="button">Купити</button>
+                <a href="#cart">🛒</a>
+              </div>
+            </article>
+
+            <article class="product" id="c4">
+              <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=60" alt="Ноутбук">
+              <h3>Ноутбук UltraBook 14</h3>
+              <div class="price">29 999 ₴</div>
+              <div class="meta">i5 • 16 GB • 512 SSD</div>
+              <div class="rowBtns">
+                <button type="button">Купити</button>
+                <a href="#cart">🛒</a>
+              </div>
+            </article>
+
+            <article class="product" id="c5">
+              <img src="https://images.unsplash.com/photo-1518441314775-6a3f7a05b7a0?auto=format&fit=crop&w=1200&q=60" alt="Навушники">
+              <h3>Навушники SoundPro</h3>
+              <div class="price">1 799 ₴</div>
+              <div class="meta">Bluetooth • ANC</div>
+              <div class="rowBtns">
+                <button type="button">Купити</button>
+                <a href="#favorites">♡</a>
+              </div>
+            </article>
+
+            <article class="product">
+              <img src="https://images.unsplash.com/photo-1609592005158-a6d49b22463d?auto=format&fit=crop&w=1200&q=60" alt="Повербанк">
+              <h3>Повербанк Power 20K</h3>
+              <div class="price">999 ₴</div>
+              <div class="meta">Швидка зарядка • USB-C</div>
+              <div class="rowBtns">
+                <button type="button">Купити</button>
+                <a href="#cart">🛒</a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Таблиця -->
+        <div class="card cardPad" style="margin-top:16px;" id="delivery">
+          <h2>Таблиця: способи доставки</h2>
+          <h3 style="margin:6px 0 0; color:var(--muted); font-size:14px;">Приклад для лабораторної</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Спосіб</th>
+                <th>Термін</th>
+                <th>Вартість</th>
+                <th>Коментар</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Відділення пошти</td>
+                <td>1–3 дні</td>
+                <td>від 70 ₴</td>
+                <td>Найпопулярніший варіант</td>
+              </tr>
+              <tr>
+                <td>Кур’єр</td>
+                <td>1–2 дні</td>
+                <td>від 120 ₴</td>
+                <td>Доставка до дверей</td>
+              </tr>
+              <tr>
+                <td>Самовивіз</td>
+                <td>0–1 день</td>
+                <td>0 ₴</td>
+                <td>За наявності у пункті видачі</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Форма -->
+        <div class="card cardPad" style="margin-top:16px;" id="form">
+          <h2>Форма: зворотний зв’язок</h2>
+          <p class="note">Це демо-форма (для перевірки тегів і роботи сторінки).</p>
+
+          <form action="#" method="post">
+            <div class="formGrid">
+              <div>
+                <label for="name">Ім’я</label>
+                <input id="name" name="name" type="text" placeholder="Введіть ім’я" required>
+              </div>
+              <div>
+                <label for="phone">Телефон</label>
+                <input id="phone" name="phone" type="tel" placeholder="+380..." required>
+              </div>
+            </div>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="name@example.com" required>
+
+            <label for="topic">Тема звернення</label>
+            <select id="topic" name="topic">
+              <option>Питання щодо товару</option>
+              <option>Доставка</option>
+              <option>Оплата</option>
+              <option>Повернення</option>
+            </select>
+
+            <label for="msg">Повідомлення</label>
+            <textarea id="msg" name="message" placeholder="Опишіть ваше питання…"></textarea>
+
+            <div style="margin-top:10px;">
+              <label style="font-weight:900;">
+                <input type="checkbox" required>
+                Погоджуюсь на обробку персональних даних
+              </label>
+            </div>
+
+            <div class="formActions">
+              <button class="btnPrimary btn" type="submit">Надіслати</button>
+              <span class="note">Після натискання нічого не відправляється (демо)</span>
+            </div>
+          </form>
+        </div>
+
+        <!-- Посилання на about.html (вимога) -->
+        <div class="card cardPad" style="margin-top:16px;">
+          <h2>Документація</h2>
+          <p>
+            Перейти на сторінку з описом предметної галузі та бізнес-логіки:
+            <a href="about.html" style="color:var(--accent); font-weight:900;">about.html</a>
+          </p>
+        </div>
+
+        <div class="card cardPad" style="margin-top:16px;" id="cart">
+          <h2>Кошик (демо)</h2>
+          <p class="note">У майбутньому: список товарів, кількість, сума, оформлення.</p>
+        </div>
+
+        <div class="card cardPad" style="margin-top:16px;" id="favorites">
+          <h2>Обране (демо)</h2>
+          <p class="note">У майбутньому: збережені товари користувача.</p>
+        </div>
+
+        <div class="card cardPad" style="margin-top:16px;" id="account">
+          <h2>Профіль (демо)</h2>
+          <p class="note">У майбутньому: вхід/реєстрація, історія замовлень, адреси.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © 2025 MarketHub — навчальний макет (сучасний дизайн)
+    </div>
+  </footer>
+</body>
+</html>
