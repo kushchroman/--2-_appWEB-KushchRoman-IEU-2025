@@ -1,516 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ElectroMarket — головна (макет у стилі маркетплейсу)</title>
-
-  <style>
-    :root{
-      --green:#00a046;
-      --dark:#111;
-      --muted:#666;
-      --bg:#f5f5f5;
-      --card:#fff;
-      --border:#e6e6e6;
-      --radius:16px;
-    }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:var(--bg);
-      color:#222;
-    }
-    a{ color:inherit; }
-
-    /* Header */
-    header{
-      background:var(--card);
-      border-bottom:1px solid var(--border);
-      position:sticky; top:0; z-index:10;
-    }
-    .wrap{ max-width:1200px; margin:0 auto; padding:0 16px; }
-    .topbar{
-      display:flex; gap:12px; align-items:center;
-      padding:12px 0;
-    }
-    .logo{
-      display:flex; align-items:center; gap:10px;
-      text-decoration:none;
-      font-weight:800;
-      color:var(--green);
-      font-size:20px;
-      white-space:nowrap;
-    }
-    .catalogBtn{
-      border:1px solid var(--border);
-      background:#fff;
-      padding:10px 12px;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:700;
-    }
-    .search{
-      flex:1; display:flex; gap:8px; align-items:center;
-    }
-    .search input{
-      width:100%;
-      padding:11px 12px;
-      border:1px solid #ddd;
-      border-radius:12px;
-      outline:none;
-    }
-    .search button{
-      padding:11px 14px;
-      border:0;
-      border-radius:12px;
-      background:var(--green);
-      color:#fff;
-      font-weight:700;
-      cursor:pointer;
-    }
-    .actions{
-      display:flex; gap:10px; align-items:center;
-      white-space:nowrap;
-    }
-    .iconLink{
-      text-decoration:none;
-      padding:10px 12px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      background:#fff;
-      font-size:14px;
-    }
-
-    /* Subnav */
-    .subnav{
-      border-top:1px solid var(--border);
-      padding:10px 0;
-    }
-    .chips{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .chip{
-      text-decoration:none;
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:999px;
-      padding:8px 10px;
-      font-size:14px;
-    }
-
-    /* Layout */
-    main{ padding:16px 0 40px; }
-    .grid{
-      display:grid;
-      grid-template-columns: 280px 1fr;
-      gap:16px;
-      align-items:start;
-    }
-
-    /* Sidebar categories */
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:16px;
-    }
-    .sidebar h2{ margin:0 0 10px; font-size:18px; }
-    .sidebar ul{ margin:0; padding-left:18px; }
-    .sidebar li{ margin:6px 0; }
-    .sidebar a{ text-decoration:none; color:#222; }
-    .sidebar a:hover{ color:var(--green); }
-
-    /* Content */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:16px;
-      margin-bottom:16px;
-    }
-    .heroBanner{
-      border-radius:14px;
-      overflow:hidden;
-      border:1px solid var(--border);
-      background:#fff;
-    }
-    .heroBanner img{
-      width:100%; height:220px; object-fit:cover; display:block;
-    }
-    .heroBanner .text{
-      padding:14px;
-    }
-    .heroBanner h1{ margin:0 0 6px; font-size:22px; }
-    .heroBanner p{ margin:0; color:var(--muted); }
-
-    .miniPromo h3{ margin:0 0 10px; font-size:18px; }
-    .miniPromo img{
-      width:100%; height:140px; object-fit:cover; border-radius:12px;
-      border:1px solid var(--border);
-    }
-    .btn{
-      display:inline-block;
-      margin-top:10px;
-      padding:10px 12px;
-      background:var(--green);
-      color:#fff;
-      border-radius:12px;
-      text-decoration:none;
-      font-weight:700;
-    }
-
-    /* Products */
-    .sectionTitle{
-      display:flex; align-items:baseline; justify-content:space-between;
-      gap:12px;
-      margin:16px 0 10px;
-    }
-    .sectionTitle h2{ margin:0; font-size:20px; }
-    .sectionTitle small{ color:var(--muted); }
-    .products{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:16px;
-    }
-    .product{
-      padding:12px;
-    }
-    .product img{
-      width:100%; height:160px; object-fit:cover;
-      border-radius:12px; border:1px solid var(--border);
-      background:#fafafa;
-    }
-    .product h3{
-      margin:10px 0 6px;
-      font-size:16px;
-      line-height:1.2;
-    }
-    .price{ font-weight:800; font-size:18px; }
-    .muted{ color:var(--muted); font-size:13px; }
-    .buyRow{
-      display:flex; gap:10px; align-items:center; margin-top:10px;
-    }
-    .buyRow button{
-      flex:1;
-      padding:10px 12px;
-      border:0;
-      border-radius:12px;
-      background:var(--green);
-      color:#fff;
-      font-weight:800;
-      cursor:pointer;
-    }
-    .buyRow a{
-      padding:10px 12px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      text-decoration:none;
-      background:#fff;
-      font-size:14px;
-    }
-
-    /* Table + Form */
-    table{ width:100%; border-collapse:collapse; margin-top:10px; }
-    th, td{ border:1px solid var(--border); padding:10px; text-align:left; }
-    th{ background:#fafafa; }
-    form .row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    label{ display:block; font-weight:700; margin:10px 0 6px; }
-    input, select, textarea{
-      width:100%;
-      padding:10px 12px;
-      border:1px solid #ddd;
-      border-radius:12px;
-      outline:none;
-      font-family:inherit;
-    }
-    textarea{ min-height:110px; resize:vertical; }
-    .formActions{ display:flex; gap:10px; align-items:center; margin-top:12px; }
-    .formActions button{ padding:10px 12px; border:0; border-radius:12px; background:var(--green); color:#fff; font-weight:800; cursor:pointer; }
-    .formActions .note{ color:var(--muted); font-size:13px; }
-
-    footer{
-      padding:18px 0;
-      border-top:1px solid var(--border);
-      background:#fff;
-      color:var(--muted);
-      text-align:center;
-    }
-
-    @media (max-width: 1000px){
-      .grid{ grid-template-columns:1fr; }
-      .hero{ grid-template-columns:1fr; }
-      .products{ grid-template-columns: repeat(2, 1fr); }
-      form .row{ grid-template-columns:1fr; }
-    }
-    @media (max-width: 560px){
-      .products{ grid-template-columns: 1fr; }
-      .topbar{ flex-wrap:wrap; }
-      .actions{ width:100%; justify-content:flex-end; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>РњС–Р№ WEB-Р·Р°СЃС‚РѕСЃСѓРЅРѕРє вЂ” С‚РµСЃС‚</title>
 </head>
-
 <body>
-  <header>
-    <div class="wrap">
-      <div class="topbar">
-        <a class="logo" href="index.html" aria-label="Головна">
-          ElectroMarket
-        </a>
 
-        <button class="catalogBtn" type="button">Каталог</button>
+    <!-- Р—Р°РіРѕР»РѕРІРєРё СЂС–Р·РЅРёС… СЂС–РІРЅС–РІ -->
+    <h1>Р“РѕР»РѕРІРЅР° СЃС‚РѕСЂС–РЅРєР° WEB-Р·Р°СЃС‚РѕСЃСѓРЅРєСѓ</h1>
+    <h2>РќР°РІС‡Р°Р»СЊРЅРёР№ РјР°РєРµС‚</h2>
+    <h3>РџРµСЂРµРІС–СЂРєР° РєРёСЂРёР»РёС†С–</h3>
 
-        <div class="search" aria-label="Пошук">
-          <input type="search" placeholder="Пошук товарів (наприклад: ноутбук)" />
-          <button type="button">Знайти</button>
-        </div>
+    <p>
+        Р¦Рµ РїСЂРѕСЃС‚РёР№ HTML-РјР°РєРµС‚ РґР»СЏ РїРµСЂРµРІС–СЂРєРё РїСЂР°РІРёР»СЊРЅРѕРіРѕ РІС–РґРѕР±СЂР°Р¶РµРЅРЅСЏ
+        СѓРєСЂР°С—РЅСЃСЊРєРѕС— РјРѕРІРё Р±РµР· С–С”СЂРѕРіР»С–С„С–РІ.
+    </p>
 
-        <div class="actions">
-          <a class="iconLink" href="#account">Профіль</a>
-          <a class="iconLink" href="#cart">Кошик</a>
-        </div>
-      </div>
+    <!-- Р—РѕР±СЂР°Р¶РµРЅРЅСЏ -->
+    <h2>Р—РѕР±СЂР°Р¶РµРЅРЅСЏ</h2>
+    <img
+        src="https://via.placeholder.com/300x150.png?text=Test+Image"
+        alt="РўРµСЃС‚РѕРІРµ Р·РѕР±СЂР°Р¶РµРЅРЅСЏ">
 
-      <div class="subnav">
-        <div class="chips">
-          <a class="chip" href="#top">Топ</a>
-          <a class="chip" href="#promos">Акції</a>
-          <a class="chip" href="#delivery">Доставка</a>
-          <a class="chip" href="#form">Зворотний зв’язок</a>
-          <!-- Вимога: посилання на сторінку з предметною галуззю і бізнес-логікою -->
-          <a class="chip" href="about.html">Опис предметної галузі та бізнес-логіки</a>
-        </div>
-      </div>
-    </div>
-  </header>
+    <!-- РњР°СЂРєС–СЂРѕРІР°РЅРёР№ СЃРїРёСЃРѕРє -->
+    <h2>РњР°СЂРєРѕРІР°РЅРёР№ СЃРїРёСЃРѕРє</h2>
+    <ul>
+        <li>РџСѓРЅРєС‚ РїРµСЂС€РёР№</li>
+        <li>РџСѓРЅРєС‚ РґСЂСѓРіРёР№</li>
+        <li>РџСѓРЅРєС‚ С‚СЂРµС‚С–Р№</li>
+    </ul>
 
-  <main class="wrap">
-    <div class="grid">
-      <!-- ЛІВА КОЛОНКА: категорії (список) -->
-      <aside class="card sidebar" id="catalog">
-        <h2>Категорії</h2>
+    <!-- РќСѓРјРµСЂРѕРІР°РЅРёР№ СЃРїРёСЃРѕРє -->
+    <h2>РќСѓРјРµСЂРѕРІР°РЅРёР№ СЃРїРёСЃРѕРє</h2>
+    <ol>
+        <li>РљСЂРѕРє РѕРґРёРЅ</li>
+        <li>РљСЂРѕРє РґРІР°</li>
+        <li>РљСЂРѕРє С‚СЂРё</li>
+    </ol>
 
-        <!-- Маркований список -->
-        <ul>
-          <li><a href="#phones">Смартфони</a></li>
-          <li><a href="#laptops">Ноутбуки</a></li>
-          <li><a href="#audio">Навушники</a></li>
-          <li><a href="#tv">ТВ та мультимедіа</a></li>
-          <li><a href="#accessories">Аксесуари</a></li>
-        </ul>
+    <!-- РўР°Р±Р»РёС†СЏ -->
+    <h2>РўР°Р±Р»РёС†СЏ</h2>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>РќР°Р·РІР°</th>
+            <th>Р—РЅР°С‡РµРЅРЅСЏ</th>
+        </tr>
+        <tr>
+            <td>HTML</td>
+            <td>РЎС‚СЂСѓРєС‚СѓСЂР°</td>
+        </tr>
+        <tr>
+            <td>CSS</td>
+            <td>РЎС‚РёР»С–</td>
+        </tr>
+    </table>
 
-        <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;">
+    <!-- Р¤РѕСЂРјР° -->
+    <h2>Р¤РѕСЂРјР°</h2>
+    <form>
+        <label>
+            Р†РјвЂ™СЏ:
+            <input type="text" placeholder="Р’РІРµРґС–С‚СЊ С–РјвЂ™СЏ">
+        </label>
+        <br><br>
 
-        <h3 style="margin:0 0 8px;">Як замовити (нумерований список)</h3>
-        <ol style="margin:0; padding-left:18px;">
-          <li>Оберіть товар</li>
-          <li>Додайте у кошик</li>
-          <li>Заповніть форму</li>
-          <li>Отримайте доставку</li>
-        </ol>
-      </aside>
+        <label>
+            Email:
+            <input type="email" placeholder="email@example.com">
+        </label>
+        <br><br>
 
-      <!-- ПРАВА КОЛОНКА: контент -->
-      <section>
-        <!-- Заголовки різних рівнів + банери + зображення -->
-        <div class="hero" id="promos">
-          <div class="heroBanner">
-            <img
-              src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1400&q=60"
-              alt="Банер: техніка та аксесуари" />
-            <div class="text">
-              <h1>Головна сторінка майбутнього WEB-застосунку</h1>
-              <h2 style="margin:6px 0 0; font-size:16px; color:var(--muted); font-weight:700;">
-                Макет у стилі маркетплейсу (приклад як Rozetka)
-              </h2>
-              <p style="margin-top:10px;">
-                На сторінці присутні: заголовки, зображення, таблиця, списки, форма та посилання на опис предметної галузі.
-              </p>
-            </div>
-          </div>
+        <button type="submit">РќР°РґС–СЃР»Р°С‚Рё</button>
+    </form>
 
-          <div class="card miniPromo">
-            <h3>Акція тижня</h3>
-            <img
-              src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=1200&q=60"
-              alt="Промо: ноутбук" />
-            <p class="muted" style="margin:10px 0 0;">Знижки на ноутбуки та аксесуари — демо-блок.</p>
-            <a class="btn" href="#top">Дивитись топ</a>
-          </div>
-        </div>
+    <!-- РџРѕСЃРёР»Р°РЅРЅСЏ -->
+    <h2>РџРѕСЃРёР»Р°РЅРЅСЏ</h2>
+    <p>
+        <a href="about.html">РџРµСЂРµР№С‚Рё РЅР° СЃС‚РѕСЂС–РЅРєСѓ Р· РѕРїРёСЃРѕРј</a>
+    </p>
 
-        <!-- Блок “Топ продажів” (карточки) -->
-        <div class="card">
-          <div class="sectionTitle" id="top">
-            <h2>Топ продажів</h2>
-            <small>Демо-картки товарів</small>
-          </div>
-
-          <div class="products">
-            <article class="card product" id="phones">
-              <h3>Смартфон Nova X12</h3>
-              <img
-                src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=60"
-                alt="Смартфон" />
-              <div class="price">12 999 грн</div>
-              <div class="muted">6.5? • 128 GB • 5000 mAh</div>
-              <div class="buyRow">
-                <button type="button">Купити</button>
-                <a href="#cart">Кошик</a>
-              </div>
-            </article>
-
-            <article class="card product" id="laptops">
-              <h3>Ноутбук UltraBook 14</h3>
-              <img
-                src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=60"
-                alt="Ноутбук" />
-              <div class="price">29 999 грн</div>
-              <div class="muted">i5 • 16 GB RAM • 512 GB SSD</div>
-              <div class="buyRow">
-                <button type="button">Купити</button>
-                <a href="#cart">Кошик</a>
-              </div>
-            </article>
-
-            <article class="card product" id="audio">
-              <h3>Навушники SoundPro</h3>
-              <img
-                src="https://images.unsplash.com/photo-1518441314775-6a3f7a05b7a0?auto=format&fit=crop&w=1200&q=60"
-                alt="Навушники" />
-              <div class="price">1 799 грн</div>
-              <div class="muted">Bluetooth • ANC • до 20 год</div>
-              <div class="buyRow">
-                <button type="button">Купити</button>
-                <a href="#cart">Кошик</a>
-              </div>
-            </article>
-
-            <article class="card product" id="accessories">
-              <h3>Повербанк Power 20K</h3>
-              <img
-                src="https://images.unsplash.com/photo-1609592005158-a6d49b22463d?auto=format&fit=crop&w=1200&q=60"
-                alt="Повербанк" />
-              <div class="price">999 грн</div>
-              <div class="muted">20 000 mAh • швидка зарядка</div>
-              <div class="buyRow">
-                <button type="button">Купити</button>
-                <a href="#cart">Кошик</a>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <!-- Таблица (обязательный элемент) -->
-        <div class="card" style="margin-top:16px;" id="delivery">
-          <h2>Таблиця: способи доставки</h2>
-          <h3 style="margin-top:6px; color:var(--muted); font-size:14px;">Приклад для макету</h3>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Спосіб</th>
-                <th>Термін</th>
-                <th>Вартість</th>
-                <th>Коментар</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Нова пошта (відділення)</td>
-                <td>1–3 дні</td>
-                <td>від 70 грн</td>
-                <td>Оплата онлайн / при отриманні</td>
-              </tr>
-              <tr>
-                <td>Кур’єр</td>
-                <td>1–2 дні</td>
-                <td>від 120 грн</td>
-                <td>Доступно в обласних центрах</td>
-              </tr>
-              <tr>
-                <td>Самовивіз</td>
-                <td>0–1 день</td>
-                <td>0 грн</td>
-                <td>За наявності в пункті видачі</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Форма (обязательный элемент) -->
-        <div class="card" style="margin-top:16px;" id="form">
-          <h2>Форма: заявка / зворотний зв’язок</h2>
-          <p class="muted">Це демо-форма для лабораторної (без справжньої відправки).</p>
-
-          <form action="#" method="post">
-            <div class="row">
-              <div>
-                <label for="name">Ім’я</label>
-                <input id="name" name="name" type="text" placeholder="Введіть ім’я" required>
-              </div>
-              <div>
-                <label for="phone">Телефон</label>
-                <input id="phone" name="phone" type="tel" placeholder="+380..." required>
-              </div>
-            </div>
-
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="name@example.com" required>
-
-            <label for="topic">Тема</label>
-            <select id="topic" name="topic">
-              <option>Питання про товар</option>
-              <option>Доставка</option>
-              <option>Оплата</option>
-              <option>Повернення</option>
-            </select>
-
-            <label for="msg">Повідомлення</label>
-            <textarea id="msg" name="message" placeholder="Опишіть ваше питання…"></textarea>
-
-            <div style="margin-top:10px;">
-              <label style="font-weight:700;">
-                <input type="checkbox" required>
-                Погоджуюсь на обробку персональних даних
-              </label>
-            </div>
-
-            <div class="formActions">
-              <button type="submit">Надіслати</button>
-              <span class="note">Потрібно для виконання вимог лабораторної</span>
-            </div>
-          </form>
-        </div>
-
-        <!-- Обязательная ссылка на страницу с описанием предметной области -->
-        <div class="card" style="margin-top:16px;">
-          <h2>Документація</h2>
-          <p>
-            Перейти на сторінку з описом предметної галузі та бізнес-логіки:
-            <a href="about.html"><b>about.html</b></a>
-          </p>
-        </div>
-
-        <div class="card" style="margin-top:16px;" id="cart">
-          <h2>Кошик (демо)</h2>
-          <p class="muted">У майбутньому тут буде список товарів та оформлення замовлення.</p>
-        </div>
-
-        <div class="card" style="margin-top:16px;" id="account">
-          <h2>Профіль (демо)</h2>
-          <p class="muted">У майбутньому: вхід/реєстрація, історія замовлень, адреси доставки.</p>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      © 2025 ElectroMarket — навчальний макет (без копіювання Rozetka)
-    </div>
-  </footer>
 </body>
 </html>
